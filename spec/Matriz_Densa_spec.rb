@@ -1,14 +1,22 @@
 # require "lib/prct09/Matriz.rb"
 require_relative '../lib/prct09/Matriz.rb'
+require_relative '../lib/prct09/fraccion.rb'
 
 describe Matriz_Densa do
   before :each do
+	 @arrFrac = [[Fraccion.new(1, 2), Fraccion.new(0, 1)], [Fraccion.new(0, 1), Fraccion.new(0, 1)]]
+	 @arrFrac1 = [[Fraccion.new(3, 2), Fraccion.new(1, 1)], [Fraccion.new(1, 1), Fraccion.new(1, 1)]]
+	 @arrFrac2 = [[Fraccion.new(1, 2), Fraccion.new(1, 2)], [Fraccion.new(0, 1), Fraccion.new(0, 1)]]
     matrizMadre = Matriz.new()
     @mat_A = matrizMadre.convert([[1, 2], [3, 4]])
     @mat_B = matrizMadre.convert([[2, 3], [7, 1]])
+	 @mat_C = matrizMadre.convert([[1, 1][1, 1]])#[[1, 1][1, 1]]
+	 @mat_D = matrizMadre.convert(@arrFrac)#[[1/2, 0/1][0/1, 0/1]]
 	 @mat_Datos = matrizMadre.convert([[1, 2], [3, 4]])
 	 @result_sum = matrizMadre.convert([[3, 5], [10, 5]])
+	 @result_sum2 = matrizMadre.convert(@arrFrac1)
 	 @result_mult = matrizMadre.convert([[16, 5], [34, 13]])
+	 @result_mult2 = matrizMadre.convert(@arrFrac2)
   end
   
   describe "# Tamanyo de la matriz " do
@@ -60,5 +68,15 @@ describe Matriz_Densa do
 	  end
 	end
 	
-	
+	describe "# Espectativa para [[1, 1][1, 1]] + o * [[1/2, 0/1][0/1, 0/1]]" do
+		it "Se deben poder Sumar" do
+			sum = @mat_C + @mat_D
+			sum.should == @result_sum2
+		end
+		it "Se deben poder Multiplicar" do
+			mult = @mat_C * @mat_D
+			mult.should == @result_mult2
+		end
+	end
+	#implementar espectativa para [[1, 1][1, 1]] * [[1/2, 0/1][0/1, 0/1]]
 end
