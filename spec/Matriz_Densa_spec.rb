@@ -10,7 +10,7 @@ describe Matriz_Densa do
     matrizMadre = Matriz.new()
     @mat_A = matrizMadre.convert([[1, 2], [3, 4]])
     @mat_B = matrizMadre.convert([[2, 3], [7, 1]])
-	 @mat_C = matrizMadre.convert([[1, 1][1, 1]])#[[1, 1][1, 1]]
+	 @mat_C = matrizMadre.convert([[1, 1], [1, 1]])
 	 @mat_D = matrizMadre.convert(@arrFrac)#[[1/2, 0/1][0/1, 0/1]]
 	 @mat_Datos = matrizMadre.convert([[1, 2], [3, 4]])
 	 @result_sum = matrizMadre.convert([[3, 5], [10, 5]])
@@ -69,6 +69,12 @@ describe Matriz_Densa do
 	end
 	
 	describe "# Espectativa para [[1, 1][1, 1]] + o * [[1/2, 0/1][0/1, 0/1]]" do
+		it "Debe existir un numero de filas para mat_D (Fracciones)" do
+			@mat_D._fil.should eq(2)
+		end
+		it "Debe existir un numero de columnas para mat_C (1,1,1,1)" do
+			@mat_C._fil.should eq(2)
+		end
 		it "Se deben poder Sumar" do
 			sum = @mat_C + @mat_D
 			sum.should == @result_sum2
